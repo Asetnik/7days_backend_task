@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Form{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    {{ form(form) }}
+
+    {% if formResult is defined %}
+    <p>
+        The time zone {{ formResult['timezone'] }} has {{ formResult['minutes_offset'] }} minutes offset to UTC on the given day at noon.<br />
+        February in this year is {{ formResult['february_days'] }} days long.<br />
+        The specified month {{ formResult['month_name'] }} is {{ formResult['month_days'] }} days long.
+    </p>
+    {% endif %}
+</div>
+{% endblock %}
