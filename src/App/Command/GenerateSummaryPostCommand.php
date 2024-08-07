@@ -8,10 +8,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GenerateRandomPostCommand extends Command
+class GenerateSummaryPostCommand extends Command
 {
-    protected static $defaultName = 'app:generate-random-post';
-    protected static $defaultDescription = 'Run app:generate-random-post';
+    protected static $defaultName = 'app:generate-summary-post';
+    protected static $defaultDescription = 'Run app:generate-summary-post';
 
     private LoremIpsum $loremIpsum;
     private PostService $postService;
@@ -29,12 +29,12 @@ class GenerateRandomPostCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $title = $this->loremIpsum->words(mt_rand(4, 6));
-        $content = $this->loremIpsum->paragraphs(2);
+        $title = 'Summary ' . (new \DateTime('now'))->format('Y-m-d');
+        $content = $this->loremIpsum->paragraphs(1);
 
         $this->postService->create($title, $content);
 
-        $output->writeln('A random post has been generated.');
+        $output->writeln('A summary post has been generated.');
 
         return Command::SUCCESS;
     }
